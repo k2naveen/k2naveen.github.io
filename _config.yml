@@ -1,0 +1,31 @@
+title: Naveen Kumar
+email: naveen1.kumar@intel.com
+description: >-
+  Notes on Linux graphics, Wayland, VRR, and display pipelines.
+baseurl: ""
+url: "https://naveenk2.github.io"
+github_username: k2naveen
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+permalink: /:categories/:year/:month/:day/:title:output_ext
+
+minima:
+  social_links:
+    - { platform: github, user_url: "https://github.com/k2naveen" }
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
