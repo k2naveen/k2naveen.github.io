@@ -3,7 +3,7 @@ email: naveen1.kumar@intel.com
 description: >-
   Notes on Linux graphics, Wayland, VRR, and display pipelines.
 baseurl: ""
-url: "https://naveenk2.github.io"
+url: "https://k2naveen.github.io"
 github_username: k2naveen
 
 theme: minima

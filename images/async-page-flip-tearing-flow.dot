@@ -1,0 +1,56 @@
+digraph AsyncPageFlipFlow {
+  graph [
+    rankdir=TB,
+    bgcolor="white",
+    pad="0.35",
+    nodesep="0.4",
+    ranksep="0.55",
+    fontname="Helvetica"
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fillcolor="#F8FAFC",
+    color="#334155",
+    fontname="Helvetica",
+    fontsize=11,
+    margin="0.12,0.08"
+  ];
+
+  edge [
+    color="#475569",
+    penwidth=1.2,
+    arrowsize=0.7,
+    fontname="Helvetica",
+    fontsize=10
+  ];
+
+  A [label="Wayland client sets\npresentation hint ASYNC"];
+  B [label="wp_tearing_control_v1\nupdates surface state"];
+  C [label="Compositor picks\nfullscreen candidate"];
+  D [label="Output and policy\nallow tearing?", shape=diamond, fillcolor="#FEF3C7", color="#D97706"];
+  E [label="Use synchronized\npresentation", fillcolor="#E2E8F0"];
+  F [label="Set frame clock mode\nto UNLOCKED", fillcolor="#DBEAFE", color="#1D4ED8"];
+  G [label="Build atomic request\nwith PAGE_FLIP_ASYNC", fillcolor="#DBEAFE", color="#1D4ED8"];
+  H [label="Run async TEST_ONLY\npre-check", fillcolor="#DBEAFE", color="#1D4ED8"];
+  I [label="Async test\npassed?", shape=diamond, fillcolor="#FEF3C7", color="#D97706"];
+  J [label="Submit real async\ncommit", fillcolor="#DCFCE7", color="#15803D"];
+  K [label="Clear PAGE_FLIP_ASYNC", fillcolor="#FEE2E2", color="#B91C1C"];
+  L [label="Submit sync commit\nfor this frame", fillcolor="#FEE2E2", color="#B91C1C"];
+  M [label="Low-latency\npresentation path", fillcolor="#ECFEFF", color="#0E7490"];
+
+  A -> B;
+  B -> C;
+  C -> D;
+  D -> E [label="No"];
+  D -> F [label="Yes"];
+  F -> G;
+  G -> H;
+  H -> I;
+  I -> J [label="Yes"];
+  I -> K [label="No"];
+  K -> L;
+  J -> M;
+  L -> M;
+}
